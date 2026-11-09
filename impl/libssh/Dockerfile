@@ -6,6 +6,8 @@ ARG PASSWORD=secret
 
 FROM debian:bullseye AS libssh-builder
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/10archive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
@@ -40,6 +42,8 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/install .. && \
 
 FROM debian:bullseye AS libssh-server
 ARG VERSION
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/10archive
 RUN apt-get update && apt-get install -y --no-install-recommends \
   libssl-dev \
   zlib1g-dev \
@@ -59,7 +63,8 @@ EXPOSE 22
 
 FROM debian:bullseye AS libssh-client
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/10archive
 RUN apt-get update && apt-get install -y --no-install-recommends \
   libssl-dev \
   zlib1g-dev \

@@ -6,6 +6,8 @@ ARG PASSWORD=secret
 
 FROM debian:bullseye AS openssh-builder
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/10archive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     ca-certificates \
@@ -26,6 +28,8 @@ RUN ./configure --prefix /install && \
 # Common base image for client and server image.
 FROM debian:bullseye AS openssh-base
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/10archive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl-dev \
     zlib1g-dev \
