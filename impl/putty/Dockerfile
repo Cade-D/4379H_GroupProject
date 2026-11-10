@@ -5,7 +5,9 @@ ARG VERSION=0.79
 FROM debian:bullseye AS putty-client
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN apt-get update && \
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/10archive && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \
