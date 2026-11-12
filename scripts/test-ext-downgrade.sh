@@ -38,7 +38,8 @@ function select_server {
   echo "[i] This script supports the following SSH servers:"
   echo -e "\t1) OpenSSH 9.5p1"
   echo -e "\t2) OpenSSH 9.4p1 (CBC-EtM Ping unsupported)"
-  read -p "[+] Please select SSH server to connect to [1-2]: " SERVER_IMPL
+  echo -e "\t3) OpenSSH 9.6p1"
+  read -p "[+] Please select SSH server to connect to [1-3]: " SERVER_IMPL
 
   case $SERVER_IMPL in
     1)
@@ -47,6 +48,9 @@ function select_server {
     2)
       SERVER_IMPL_NAME="OpenSSH 9.4p1"
       SERVER_IMAGE="terrapin-artifacts/openssh-server:9.4p1" ;;
+    3)
+      SERVER_IMPL_NAME="OpenSSH 9.6p1"
+      SERVER_IMAGE="terrapin-artifacts/openssh-server:9.6p1" ;;
     *)
       echo "[!] Invalid selection, please re-run the script"
       exit 1 ;;

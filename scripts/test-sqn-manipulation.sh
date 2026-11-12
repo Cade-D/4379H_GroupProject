@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SERVER_IMPL_NAME="OpenSSH 9.5p1"
-SERVER_IMAGE="terrapin-artifacts/openssh-server:9.5p1"
+SERVER_IMPL_NAME="OpenSSH 9.6p1"
+SERVER_IMAGE="terrapin-artifacts/openssh-server:9.6p1"
 SERVER_CONTAINER_NAME="terrapin-artifacts-server"
 SERVER_PORT=2200
 
