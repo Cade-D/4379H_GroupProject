@@ -30,3 +30,8 @@ build_image_conditional ext-downgrade-cbc-ping
 ############################################################
 build_image_conditional asyncssh-rogue-extension-negotiation
 build_image_conditional asyncssh-rogue-session-attack
+
+############################################################
+## Strict Kex Downgrade Attack                            ##
+############################################################
+build_image_conditional strict-kex-downgrade

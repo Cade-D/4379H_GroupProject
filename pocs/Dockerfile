@@ -43,3 +43,9 @@ ENTRYPOINT ["python", "asyncssh/rogue_extension_negotiation.py"]
 
 FROM poc-base AS asyncssh-rogue-session-attack
 ENTRYPOINT ["python", "asyncssh/rogue_session_attack.py"]
+
+############################################################
+## Strict Kex Downgrade Attack                            ##
+############################################################
+FROM poc-base AS strict-kex-downgrade
+ENTRYPOINT ["python", "strict-kex-downgrade/strict_kex_downgrade.py"]
