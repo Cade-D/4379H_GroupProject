@@ -95,7 +95,8 @@ function select_client {
   echo -e "\t4) OpenSSH 9.4p1"
   echo -e "\t5) OpenSSH 9.5p1"
   echo -e "\t6) PuTTY 0.79"
-  read -p "[+] Please select client implementation to test [1-6]: " CLIENT_IMPL
+  echo -e "\t7) OpenSSH 9.6p1"
+  read -p "[+] Please select client implementation to test [1-7]: " CLIENT_IMPL
 
   case $CLIENT_IMPL in
     1)
@@ -110,7 +111,7 @@ function select_client {
       UNKNOWN_ID="C0" ;;
     3)
       CLIENT_IMPL_NAME="libssh 0.10.5"
-      CLIENT_IMAGE="terrapin-artifacts/libssh-client:0.10.5" 
+      CLIENT_IMAGE="terrapin-artifacts/libssh-client:0.10.5"
       ARGS="-p $POC_PORT victim@127.0.0.1"
       UNKNOWN_ID="C0" ;;
     4)
@@ -128,6 +129,11 @@ function select_client {
       CLIENT_IMAGE="terrapin-artifacts/putty-client:0.79"
       ARGS="-P $POC_PORT victim@127.0.0.1"
       UNKNOWN_ID="C0" ;;
+    7)
+      CLIENT_IMPL_NAME="OpenSSH 9.6p1"
+      CLIENT_IMAGE="terrapin-artifacts/openssh-client:9.6p1"
+      ARGS="-p $POC_PORT victim@127.0.0.1"
+      UNKNOWN_ID="09" ;;
     *)
       echo "[!] Invalid selection, please re-run the script"
       exit 1 ;;

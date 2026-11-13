@@ -61,7 +61,8 @@ function select_client {
   echo "[i] This script supports the following SSH clients:"
   echo -e "\t1) OpenSSH 9.5p1"
   echo -e "\t2) PuTTY 0.79"
-  read -p "[+] Please select SSH client as attack target [1-2]: " CLIENT_IMPL
+  echo -e "\t3) OpenSSH 9.6p1"
+  read -p "[+] Please select SSH client as attack target [1-3]: " CLIENT_IMPL
 
   case $CLIENT_IMPL in
     1)
@@ -70,6 +71,9 @@ function select_client {
     2)
       CLIENT_IMPL_NAME="PuTTY 0.79"
       CLIENT_IMAGE="terrapin-artifacts/putty-client:0.79" ;;
+    3)
+      CLIENT_IMPL_NAME="OpenSSH 9.6p1"
+      CLIENT_IMAGE="terrapin-artifacts/openssh-client:9.6p1" ;;
     *)
       echo "[!] Invalid selection, please re-run the script"
       exit 1 ;;
